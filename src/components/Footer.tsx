@@ -54,7 +54,7 @@ export default function Footer() {
            <h5 className="font-mono text-xs uppercase tracking-widest text-warm-white/40 mb-6">Contacto</h5>
            <div className="flex flex-col gap-6">
               <a
-                href="https://wa.me/[NUMERO]"
+                href="https://wa.me/525561114259?text=Hola%20Ricardo,%20vengo%20del%20sitio%20web%20y%20me%20gustar%C3%ADa%20empezar%20mi%20entrenamiento."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold text-sm w-fit hover:-translate-y-1 transition-transform"
