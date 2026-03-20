@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { gsap } from "@/lib/gsap-config";
 import { useGSAP } from "@gsap/react";
 
@@ -184,7 +184,7 @@ function PillarCalibrationAnim() {
     // Simulate 3 levels of "searching/calibrating" for the optimal pillar structure
     const steps = 3;
     for (let s = 0; s < steps; s++) {
-      barsRef.current.forEach((bar, i) => {
+      barsRef.current.forEach((bar) => {
         const height = 20 + Math.random() * 50; 
         tl.to(bar, { 
           attr: { height: height, y: 80 - height }, 
@@ -195,7 +195,7 @@ function PillarCalibrationAnim() {
     }
 
     // Finally "Lock In" the optimal 4 Pillars structure!
-    barsRef.current.forEach((bar, i) => {
+    barsRef.current.forEach((bar) => {
       tl.to(bar, { 
         attr: { height: 75, y: 5 }, 
         duration: 0.8, 
