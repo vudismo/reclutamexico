@@ -4,6 +4,7 @@ import Features from "@/components/Features";
 import Philosophy from "@/components/Philosophy";
 import Protocol from "@/components/Protocol";
 import Pricing from "@/components/Pricing";
+import MediaMention from "@/components/MediaMention";
 import SocialProof from "@/components/SocialProof";
 import Footer from "@/components/Footer";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Philosophy />
       <Protocol />
       <Pricing />
+      <MediaMention />
       <SocialProof />
       <Footer />
     </main>
