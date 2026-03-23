@@ -144,8 +144,8 @@ export default function Pricing() {
       {/* Product Block: Costales Búlgaros - Interactive Toggle V3.0 */}
       <div className="mt-24 w-full">
         <div className="bg-moss/5 border border-moss/10 rounded-[3rem] p-8 md:p-16 text-center shadow-sm max-w-4xl mx-auto">
-          <h4 className="font-sans font-bold text-3xl md:text-4xl text-charcoal mb-4">Entrenamiento de élite. Diseñado para tu cuerpo.</h4>
-          <p className="font-sans text-charcoal/70 mb-10 max-w-2xl mx-auto">Los únicos costales búlgaros en México segmentados por peso corporal. Diseñados por Ricardo. Superiores a cualquier importación.</p>
+          <h4 className="font-sans font-bold text-3xl md:text-4xl text-charcoal mb-4">El mejor costal búlgaro de México.</h4>
+          <p className="font-sans text-charcoal/70 mb-10 max-w-2xl mx-auto">Entrenamiento de élite diseñado para transformar tu cuerpo. Los únicos costales segmentados por nivel y peso corporal, diseñados por Ricardo con resistencia funcional superior a cualquier modelo importado.</p>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-[#F9F7F2] border border-[#D4CFC5] rounded-[2.5rem] p-6 md:p-10 flex flex-col items-center shadow-sm relative overflow-hidden">
              
