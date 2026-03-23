@@ -48,14 +48,16 @@ export default function Navbar() {
 
         {/* CTA Desktop */}
         <div className="hidden md:block z-50">
-          <Link
-            href="#contacto"
+          <a
+            href="https://wa.me/525561114259?text=Hola%20Ricardo,%20vengo%20del%20sitio%20web%20y%20me%20gustar%C3%ADa%20empezar%20mi%20entrenamiento."
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-accent px-6 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:scale-[1.03] active:scale-95"
             style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
           >
             <span className="absolute inset-0 w-full h-full bg-black/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             <span className="relative">Quiero empezar</span>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -78,13 +80,15 @@ export default function Navbar() {
         <Link href="#proceso" className="text-2xl font-medium" onClick={() => setIsOpen(false)}>Proceso</Link>
         <Link href="#servicios" className="text-2xl font-medium" onClick={() => setIsOpen(false)}>Servicios</Link>
         <Link href="#resultados" className="text-2xl font-medium" onClick={() => setIsOpen(false)}>Resultados</Link>
-        <Link
-          href="#contacto"
+        <a
+          href="https://wa.me/525561114259?text=Hola%20Ricardo,%20vengo%20del%20sitio%20web%20y%20me%20gustar%C3%ADa%20empezar%20mi%20entrenamiento."
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setIsOpen(false)}
           className="mt-8 relative inline-flex items-center justify-center overflow-hidden rounded-full bg-accent px-8 py-4 text-lg font-bold text-white"
         >
           Quiero empezar
-        </Link>
+        </a>
       </div>
     </>
   );
