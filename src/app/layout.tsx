@@ -25,14 +25,14 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://recluta.mx'),
+  metadataBase: new URL('https://www.reclutamexico.com'),
   title: 'Ricardo Leyva · Entrenador Personal México | Recluta México',
   description: 'De 200 kg a fisicoculturista. Ricardo Leyva ayuda a adultos mayores y personas con problemas de salud a recuperar fuerza, movilidad y calidad de vida con un método de 4 Pilares probado en el caso más difícil: el suyo.',
   keywords: ['entrenador personal', 'bajar de peso México', 'costal búlgaro', 'salud adultos mayores'],
   openGraph: {
     title: 'Recluta México — Entrenamiento que cambia vidas',
     description: 'No entreno solamente cuerpos. Entreno hábitos. Conoce el método de Ricardo Leyva y empieza tu transformación hoy.',
-    url: 'https://recluta.mx',
+    url: 'https://www.reclutamexico.com',
     siteName: 'Recluta México',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },

@@ -184,7 +184,7 @@ export default function Footer() {
           <div className="flex gap-4">
             <span>Recluta México</span>
             <span className="text-warm-white/20">|</span>
-            <span>recluta.mx</span>
+            <span>reclutamexico.com</span>
           </div>
         </div>
       </div>
