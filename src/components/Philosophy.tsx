@@ -4,82 +4,95 @@ import { useRef } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap-config";
 import { useGSAP } from "@gsap/react";
+import { XCircle, CheckCircle2 } from "lucide-react";
 
 export default function Philosophy() {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    // Parallax background
-    gsap.to(".parallax-bg", {
-      yPercent: 30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
-    // Word reveal
-    gsap.to(".split-word", {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.05,
+    gsap.from(".manifesto-block", {
+      y: 36,
+      opacity: 0,
+      duration: 0.85,
+      stagger: 0.15,
       ease: "power3.out",
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 60%",
+        start: "top 75%",
       },
     });
+
+    gsap.fromTo(
+      ".habitos-underline",
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 68%",
+        },
+      }
+    );
   }, { scope: containerRef });
 
-  const SplitWords = ({ text, className = "" }: { text: string; className?: string }) => {
-    return (
-      <span className={className}>
-        {text.split(" ").map((word, i) => (
-          <span key={i} className="inline-block overflow-hidden align-bottom pb-2 -mb-2">
-            <span className="inline-block split-word translate-y-full opacity-0">{word}</span>
-            {"\u00A0"}
-          </span>
-        ))}
-      </span>
-    );
-  };
-
   return (
-    <section ref={containerRef} id="filosofia" className="relative w-full py-40 overflow-hidden bg-moss">
-      {/* Background Texture via Image Component */}
-      <div className="absolute inset-0 z-0 parallax-bg h-[130%] -top-[15%]">
-        <div className="absolute inset-0 z-0 opacity-30 mix-blend-overlay">
-          <Image
-            src="/images/philosophy_brutalist_gym.png"
-            alt="Brutalist Gym Background"
-            fill
-            className="object-cover object-center grayscale"
-          />
-        </div>
+    <section
+      ref={containerRef}
+      id="filosofia"
+      className="relative w-full py-28 md:py-40 overflow-hidden bg-moss-deep isolate-blend"
+    >
+      {/* Background Architectural Gym Texture */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/philosophy_brutalist_gym.png"
+          alt="Brutalist Gym Background"
+          fill
+          className="object-cover object-center opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-moss-deep via-moss-deep/80 to-obsidian" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 flex flex-col gap-12">
-        {/* Statement A */}
-        <p className="font-sans text-xl md:text-3xl text-warm-white/60 font-medium max-w-3xl leading-snug">
-          <SplitWords text="La mayoría de los entrenadores se enfoca en:" />
-          <br />
-          <SplitWords text="La industria del fitness te vende rutinas genéricas, suplementos innecesarios y cuerpos imposibles." />
-        </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Statement A: The Industry Problem */}
+          <div className="manifesto-block lg:col-span-5 bg-white/[0.04] border border-white/10 rounded-[2rem] p-8 md:p-10">
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-warm-white/55 mb-5">
+              <XCircle size={15} className="text-red-400" />
+              <span>POR QUÉ ABANDONAS EN OTROS LUGARES</span>
+            </div>
+            <p className="font-sans text-xl md:text-2xl text-warm-white/80 font-medium leading-relaxed mb-6">
+              La industria tradicional te vende castigo: dietas extremas que rompes en 15 días, suplementos caros e innecesarios y rutinas copiadas que lesionan tus articulaciones.
+            </p>
+            <div className="pt-5 border-t border-white/10 font-mono text-xs text-warm-white/45 uppercase tracking-wider">
+              Resultado común: Frustración y efecto rebote
+            </div>
+          </div>
 
-        {/* Statement B */}
-        <div className="font-sans text-3xl md:text-5xl text-warm-white font-bold leading-tight max-w-5xl">
-          <SplitWords text="Yo me enfoco en:" />
-          <br className="mb-4 block" />
-          <span className="font-drama text-6xl md:text-[8rem] lg:text-[11rem] leading-[0.85] text-accent mt-4 block">
-            <SplitWords text="hábitos." />
-          </span>
-          <span className="mt-8 block">
-            <SplitWords text="Yo no entreno cuerpos. Yo construyo hábitos que duran toda la vida." />
-          </span>
+          {/* Statement B: The Recluta Manifesto */}
+          <div className="manifesto-block lg:col-span-7 flex flex-col justify-center">
+            <div className="font-sans text-3xl md:text-5xl text-warm-white font-bold leading-tight">
+              <span className="inline-flex items-center gap-2 font-mono text-xs md:text-sm uppercase tracking-[0.22em] text-accent mb-3">
+                <CheckCircle2 size={16} className="text-accent" />
+                <span>EL ESTÁNDAR RECLUTA MÉXICO:</span>
+              </span>
+
+              <div className="inline-block my-2">
+                <span className="font-drama text-7xl sm:text-8xl md:text-[8.5rem] lg:text-[9.5rem] leading-[0.85] text-accent block">
+                  hábitos.
+                </span>
+                <div
+                  aria-hidden="true"
+                  className="habitos-underline h-1.5 w-full bg-gradient-to-r from-accent via-accent/60 to-transparent rounded-full origin-left mt-3"
+                />
+              </div>
+
+              <span className="mt-6 pt-6 border-t border-white/15 block text-2xl sm:text-3xl md:text-4xl leading-[1.18] text-warm-white">
+                No entrenamos cuerpos para una foto de 30 días. Construimos la fuerza, la nutrición y la disciplina que te sostienen toda la vida.
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
