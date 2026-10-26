@@ -5,22 +5,28 @@ export default function MediaMention() {
   return (
     <section className="deferred-section bg-obsidian py-28 md:py-36 relative overflow-hidden text-warm-white border-y border-white/10">
       <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-        {/* Photo Column: True full-color studio photography */}
+        {/* Photo Column: 100% Clean Studio Photography Framed Without Overlays */}
         <div className="lg:col-span-6 order-2 lg:order-1 relative">
-          <div className="relative w-full aspect-[16/10] rounded-[2rem] overflow-hidden bg-moss-deep shadow-obsidian border border-white/15">
-            <Image
-              src="/images/recluta-mexico-bendita-nutricion-martha-debaile.jpg"
-              alt="Ricardo Leyva en Bendita Nutrición con Martha Debayle"
-              fill
-              className="object-cover object-center"
-            />
-
-            {/* ON AIR badge */}
-            <div className="absolute top-5 left-5 flex items-center gap-2.5 bg-black/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15 z-20">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="font-mono text-xs text-white tracking-widest uppercase font-bold">
-                ON AIR
+          <div className="rounded-[2rem] bg-[#141916] border border-white/15 p-4 shadow-obsidian flex flex-col gap-3">
+            <div className="flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                <span className="font-mono text-xs text-white tracking-widest uppercase font-bold">
+                  ON AIR · MARTHA DEBAYLE
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-warm-white/60 uppercase tracking-wider">
+                PODCAST OFICIAL
               </span>
+            </div>
+
+            <div className="relative w-full aspect-[16/10] rounded-[1.5rem] overflow-hidden bg-moss-deep border border-white/10">
+              <Image
+                src="/images/recluta-mexico-bendita-nutricion-martha-debaile.jpg"
+                alt="Ricardo Leyva en Bendita Nutrición con Martha Debayle"
+                fill
+                className="object-cover object-center"
+              />
             </div>
           </div>
         </div>

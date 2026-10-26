@@ -111,51 +111,47 @@ export default function SocialProof() {
           </p>
         </div>
 
-        {/* Dossier Image Grid: Full natural clarity */}
+        {/* Dossier Image Grid: 100% Clean Photos with Labels Framed Outside */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10 max-w-4xl mx-auto relative z-10">
           {/* ANTES */}
-          <div className="isolated-card rounded-[2rem] bg-obsidian aspect-[4/5] flex flex-col justify-between p-6 md:p-8 border border-white/15 relative overflow-hidden shadow-xl">
-            <Image
-              src="/images/antes.jpeg"
-              alt="Ricardo Antes — 200 kg"
-              fill
-              className="object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-dossier-gradient" />
-
-            <div className="relative z-10">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-white/90 bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 font-bold">
+          <div className="isolated-card rounded-[2rem] bg-[#141916] p-4 border border-white/15 flex flex-col gap-3.5 shadow-xl">
+            <div className="flex items-center justify-between px-1">
+              <span className="font-mono text-xs font-bold uppercase text-accent tracking-[0.18em]">
+                01 // El Origen
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white/90 bg-white/[0.06] px-3 py-1 rounded-full border border-white/15 font-bold">
                 PUNTO DE PARTIDA · 200 KG
               </span>
             </div>
 
-            <div className="relative z-10">
-              <span className="font-mono text-sm md:text-base font-bold uppercase text-accent tracking-[0.2em]">
-                01 // El Origen
-              </span>
+            <div className="relative w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-obsidian border border-white/10">
+              <Image
+                src="/images/antes.jpeg"
+                alt="Ricardo Antes — 200 kg"
+                fill
+                className="object-cover object-top"
+              />
             </div>
           </div>
 
           {/* DESPUÉS */}
-          <div className="isolated-card rounded-[2rem] bg-obsidian aspect-[4/5] flex flex-col justify-between p-6 md:p-8 border border-accent/50 relative overflow-hidden shadow-xl">
-            <Image
-              src="/images/despues.jpg"
-              alt="Ricardo Hoy — Fisicoculturista"
-              fill
-              className="object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-dossier-gradient" />
-
-            <div className="relative z-10">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-white bg-accent px-3.5 py-1.5 rounded-full font-bold">
+          <div className="isolated-card rounded-[2rem] bg-[#141916] p-4 border border-accent/50 flex flex-col gap-3.5 shadow-xl">
+            <div className="flex items-center justify-between px-1">
+              <span className="font-mono text-xs font-bold uppercase text-off-white tracking-[0.18em]">
+                02 // La Reconstrucción
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white bg-accent px-3 py-1 rounded-full font-bold">
                 RESULTADO · -105 KG
               </span>
             </div>
 
-            <div className="relative z-10">
-              <span className="font-mono text-sm md:text-base font-bold uppercase text-off-white tracking-[0.2em]">
-                02 // La Reconstrucción
-              </span>
+            <div className="relative w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-obsidian border border-white/10">
+              <Image
+                src="/images/despues.jpg"
+                alt="Ricardo Hoy — Fisicoculturista"
+                fill
+                className="object-cover object-top"
+              />
             </div>
           </div>
         </div>

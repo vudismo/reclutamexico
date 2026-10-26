@@ -181,14 +181,25 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Editorial Coach Showcase Card */}
+          {/* Right Column: Editorial Coach Showcase Card — 100% Clean Unobstructed Portrait */}
           <div
             ref={addToRefs}
             className="lg:col-span-5 xl:col-span-4 w-full max-w-md mx-auto lg:max-w-none"
           >
-            <div className="relative rounded-[2.25rem] bg-[#141916] border border-white/15 p-3.5 shadow-obsidian">
-              {/* Main Coach Portrait */}
-              <div className="relative aspect-[4/5] w-full rounded-[1.75rem] overflow-hidden bg-obsidian">
+            <div className="relative rounded-[2.25rem] bg-[#141916] border border-white/15 p-4 shadow-obsidian flex flex-col gap-3.5">
+              {/* Top Header Bar (Outside Photo so Face is 100% Clean) */}
+              <div className="flex items-center justify-between gap-2 px-1">
+                <span className="inline-flex items-center gap-1.5 bg-white/[0.06] border border-white/10 px-3 py-1.5 rounded-full font-mono text-[10px] uppercase tracking-widest text-warm-white font-bold">
+                  <ShieldCheck size={13} className="text-accent shrink-0" />
+                  <span>EVIDENCIA DOCUMENTADA</span>
+                </span>
+                <span className="bg-accent text-white px-3.5 py-1.5 rounded-full font-mono text-[11px] font-bold shadow-accent-glow whitespace-nowrap">
+                  -105 KG EN 1 AÑO
+                </span>
+              </div>
+
+              {/* Main Coach Portrait — 100% Clean, Zero Overlays */}
+              <div className="relative aspect-[4/5] w-full rounded-[1.6rem] overflow-hidden bg-obsidian border border-white/10">
                 <Image
                   src="/images/despues.jpg"
                   alt="Ricardo Leyva — Transformación de 200 kg a tarima"
@@ -196,43 +207,38 @@ export default function Hero() {
                   sizes="(max-width: 1024px) 90vw, 380px"
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent" />
+              </div>
 
-                {/* Top Floating Badge */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 bg-black/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full font-mono text-[10px] uppercase tracking-widest text-warm-white font-bold">
-                    <ShieldCheck size={13} className="text-accent" />
-                    EVIDENCIA DOCUMENTADA
-                  </span>
-                  <span className="float-badge bg-accent text-white px-3.5 py-1 rounded-full font-mono text-xs font-bold shadow-accent-glow">
-                    -105 KG EN 1 AÑO
-                  </span>
+              {/* Caption & Before Comparison Bar (Below Photo) */}
+              <div className="flex items-center justify-between gap-3 bg-white/[0.04] border border-white/10 rounded-2xl p-3.5">
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-0.5">
+                    FUNDADOR Y ENTRENADOR
+                  </div>
+                  <div className="font-sans text-lg font-extrabold text-white leading-tight">
+                    Ricardo Leyva
+                  </div>
+                  <div className="font-sans text-xs text-warm-white/70 mt-0.5">
+                    De 200 kg a fisicoculturista
+                  </div>
                 </div>
 
-                {/* Bottom Overlay Info + Thumbnail Inset */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-                  <div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-bold mb-1">
-                      FUNDADOR Y ENTRENADOR
-                    </div>
-                    <div className="font-sans text-lg font-extrabold text-white leading-tight">
-                      Ricardo Leyva
-                    </div>
-                    <div className="font-sans text-xs text-warm-white/75 mt-0.5">
-                      De 200 kg a fisicoculturista
-                    </div>
-                  </div>
-
-                  {/* Origin Thumbnail Inset */}
-                  <div className="relative w-16 h-20 rounded-xl overflow-hidden border-2 border-white/30 shadow-lg shrink-0 bg-obsidian">
+                {/* Origin Thumbnail Inset (Outside main photo) */}
+                <div className="flex items-center gap-2.5 bg-obsidian/80 border border-white/15 rounded-xl p-1.5 pr-3 shrink-0">
+                  <div className="relative w-11 h-12 rounded-lg overflow-hidden shrink-0 bg-obsidian">
                     <Image
                       src="/images/antes.jpeg"
                       alt="Ricardo antes — 200 kg"
                       fill
-                      sizes="64px"
+                      sizes="48px"
                       className="object-cover object-top"
                     />
-                    <span className="absolute bottom-0 inset-x-0 bg-black/80 text-center font-mono text-[8px] text-white/90 py-0.5 uppercase">
+                  </div>
+                  <div className="text-left">
+                    <span className="block font-mono text-[9px] uppercase tracking-wider text-warm-white/50">
+                      ORIGEN
+                    </span>
+                    <span className="block font-mono text-xs font-bold text-accent">
                       200 KG
                     </span>
                   </div>
@@ -240,7 +246,7 @@ export default function Hero() {
               </div>
 
               {/* Bottom Metric Strip */}
-              <div className="grid grid-cols-2 gap-2.5 mt-3 px-1">
+              <div className="grid grid-cols-2 gap-2.5">
                 <div className="bg-white/[0.04] border border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3">
                   <Flame size={18} className="text-accent shrink-0" />
                   <div>
