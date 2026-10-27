@@ -215,10 +215,21 @@ function DiagnosticShuffler() {
           return (
             <button
               key={pilar.id}
+              id={`pilar-tab-${i}`}
               type="button"
               role="tab"
               aria-selected={isActive}
+              aria-controls="pilar-tabpanel"
               onClick={() => handleSelect(i)}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+                  e.preventDefault();
+                  handleSelect((i + 1) % PILARES.length);
+                } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                  e.preventDefault();
+                  handleSelect((i - 1 + PILARES.length) % PILARES.length);
+                }
+              }}
               className={`w-full text-left rounded-2xl px-4 py-3 border transition-colors duration-200 flex items-center justify-between gap-3 ${
                 isActive
                   ? "bg-moss text-warm-white border-moss shadow-sm"
@@ -262,7 +273,9 @@ function DiagnosticShuffler() {
 
       {/* Dedicated Fixed-Height Inspector Box (Never shifts buttons above) */}
       <div
+        id="pilar-tabpanel"
         role="tabpanel"
+        aria-labelledby={`pilar-tab-${activePilar}`}
         className="mt-auto rounded-2xl bg-white border border-border-subtle p-4 min-h-[138px] flex flex-col justify-between"
       >
         <div className="flex items-center justify-between gap-2 mb-2">
@@ -327,10 +340,21 @@ function TelemetryTypewriter() {
           return (
             <button
               key={item.title}
+              id={`evidencia-tab-${idx}`}
               type="button"
               role="tab"
               aria-selected={isCurrent}
+              aria-controls="evidencia-tabpanel"
               onClick={() => handleSelect(idx)}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+                  e.preventDefault();
+                  handleSelect((idx + 1) % RESULTADOS.length);
+                } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                  e.preventDefault();
+                  handleSelect((idx - 1 + RESULTADOS.length) % RESULTADOS.length);
+                }
+              }}
               className={`w-full text-left rounded-xl px-3.5 py-2.5 border transition-colors duration-200 flex items-center gap-3 ${
                 isCurrent
                   ? "bg-white/[0.1] border-accent text-warm-white"
@@ -353,7 +377,9 @@ function TelemetryTypewriter() {
 
       {/* Dedicated Fixed-Height Case Explanation Box */}
       <div
+        id="evidencia-tabpanel"
         role="tabpanel"
+        aria-labelledby={`evidencia-tab-${activeIndex}`}
         className="mt-auto rounded-2xl bg-white/[0.05] border border-white/10 p-4 min-h-[138px] flex flex-col justify-between"
       >
         <div className="flex items-center gap-2 mb-2">
