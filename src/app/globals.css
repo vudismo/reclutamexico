@@ -48,9 +48,9 @@
     isolation: isolate;
   }
 
-  /* CSS Containment for cards to prevent page-wide reflows and ensure 60fps interactions */
+  /* Style containment for cards without clipping child badges or shadows */
   .isolated-card {
-    contain: layout style paint;
+    contain: style;
   }
 
   .hide-scrollbars,
@@ -91,10 +91,9 @@
     );
   }
 
-  /* Deferred rendering for below-the-fold self-contained sections */
+  /* Clean section wrapper (no content-visibility:auto to preserve exact ScrollTrigger and hash-anchor offsets) */
   .deferred-section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 42rem;
+    position: relative;
   }
 
   /* GPU-composited CTA shimmer (strictly transform + opacity) */

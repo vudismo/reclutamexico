@@ -10,17 +10,22 @@ export default function Philosophy() {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from(".manifesto-block", {
-      y: 36,
-      opacity: 0,
-      duration: 0.85,
-      stagger: 0.15,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 75%",
-      },
-    });
+    gsap.fromTo(
+      ".manifesto-block",
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.14,
+        ease: "power3.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      }
+    );
 
     gsap.fromTo(
       ".habitos-underline",

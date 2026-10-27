@@ -32,6 +32,7 @@ export default function Hero() {
         stagger: 0.09,
         ease: "power3.out",
         delay: 0.08,
+        clearProps: "transform",
       }
     );
 

@@ -9,58 +9,110 @@ import {
   Dumbbell,
   MessageCircle,
   ArrowUpRight,
+  Sparkles,
+  CalendarCheck,
 } from "lucide-react";
 import { gsap } from "@/lib/gsap-config";
 import { useGSAP } from "@gsap/react";
 
 const PILARES = [
   {
+    id: "01",
     title: "Hidratación celular",
-    benefit: "Reactiva tu metabolismo, protege articulaciones y eleva tu energía diaria.",
+    tag: "Metabolismo y articulaciones",
+    benefit:
+      "No es solo tomar agua: reponemos minerales e hidratación intracelular para lubricar articulaciones, activar tu metabolismo y eliminar la fatiga crónica.",
     icon: Droplets,
   },
   {
+    id: "02",
     title: "Sistema nervioso y descanso",
-    benefit: "Reduce el estrés y duerme profundo para oxidar grasa y recuperar músculo.",
+    tag: "Control de cortisol y sueño",
+    benefit:
+      "Un cuerpo estresado y mal dormido almacena grasa. Regulamos tu descanso profundo para que tus hormonas trabajen a tu favor y repares tejido muscular.",
     icon: Moon,
   },
   {
+    id: "03",
     title: "Alimentación estructurada",
-    benefit: "Comida real adaptada a tu vida, sin pasar hambre ni sufrir efecto rebote.",
+    tag: "Nutrición real sin rebote",
+    benefit:
+      "Olvídate de pasar hambre o pesar cada lechuga. Aprendes a estructurar comida real mexicana con suficiente proteína para perder grasa manteniendo tu energía.",
     icon: Utensils,
   },
   {
+    id: "04",
     title: "Entrenamiento personalizado",
-    benefit: "Fuerza progresiva calibrada a tu edad, historial clínico y condición actual.",
+    tag: "Fuerza segura a cualquier edad",
+    benefit:
+      "Progresión biomecánica adaptada a tus rodillas, espalda y nivel actual. Construimos músculo real que protege tus huesos y eleva tu gasto calórico diario.",
     icon: Dumbbell,
   },
 ];
 
 const RESULTADOS = [
-  "105 kg perdidos en 12 meses sin cirugías.",
-  "De caminar con bastón a competir en tarima.",
-  "Fuerza, movilidad y músculo después de los 50 y 60.",
-  "Cero suplementos milagrosos ni dietas de hambre.",
-  "Hábitos sostenibles diseñados para tu ritmo de vida.",
+  {
+    title: "105 kg perdidos en 12 meses sin cirugías.",
+    tag: "Caso Cero · Ricardo Leyva",
+    detail:
+      "De 200 kg a 95 kg en un año aplicando estrictamente los 4 Pilares: hidratación mineral, sueño reparador, comida real y fuerza progresiva.",
+  },
+  {
+    title: "De caminar con bastón a competir en tarima.",
+    tag: "Reconstrucción articular",
+    detail:
+      "Cuando fortaleces tendones y masa muscular con cargas controladas, recuperas estabilidad y eliminas dolores que parecían permanentes.",
+  },
+  {
+    title: "Fuerza y movilidad después de los 50 y 60.",
+    tag: "Longevidad funcional",
+    detail:
+      "Nuestros alumnos mayores recuperan la capacidad de subir escaleras, cargar peso y moverse con agilidad sin miedo a lesionarse.",
+  },
+  {
+    title: "Cero suplementos milagrosos ni dietas extremas.",
+    tag: "100% fisiología real",
+    detail:
+      "No vendemos polvos mágicos ni castigos de hambre. El resultado proviene de hábitos medibles que puedes sostener toda la vida.",
+  },
+  {
+    title: "El mismo método adaptado a tu cuerpo.",
+    tag: "Personalización total",
+    detail:
+      "Tanto si partes desde cero con sobrepeso como si buscas rendimiento atlético, calibramos la intensidad exactamente a tu punto de partida.",
+  },
 ];
 
-const DIAS = ["L", "M", "X", "J", "V", "S", "D"];
+const DIAS = [
+  { short: "L", full: "Lunes" },
+  { short: "M", full: "Martes" },
+  { short: "X", full: "Miércoles" },
+  { short: "J", full: "Jueves" },
+  { short: "V", full: "Viernes" },
+  { short: "S", full: "Sábado" },
+  { short: "D", full: "Domingo" },
+];
 
 export default function Features() {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from(".feature-card", {
-      y: 40,
-      opacity: 0,
-      duration: 0.75,
-      stagger: 0.12,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%",
-      },
-    });
+    gsap.fromTo(
+      ".feature-card",
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power3.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 82%",
+        },
+      }
+    );
   }, { scope: containerRef });
 
   return (
@@ -77,11 +129,11 @@ export default function Features() {
           Por qué las dietas fallan y este método sí funciona
         </h2>
         <p className="font-sans text-base md:text-lg text-charcoal/75 leading-relaxed">
-          Entrenar sin descansar o hacer dieta sin hidratación celular solo agota tu cuerpo. Nuestro sistema sincroniza las 4 áreas que determinan tu composición corporal y tu salud a largo plazo:
+          Entrenar sin descansar o hacer dieta sin hidratación celular solo agota tu cuerpo. Interactúa con cada tarjeta para explorar cómo sincronizamos tu biología:
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
         <DiagnosticShuffler />
         <TelemetryTypewriter />
         <ProtocolScheduler />
@@ -118,81 +170,109 @@ export default function Features() {
 
 function DiagnosticShuffler() {
   const [activePilar, setActivePilar] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setActivePilar((prev) => (prev + 1) % PILARES.length);
-    }, 4200);
+    }, 5200);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
+
+  const current = PILARES[activePilar];
+
+  const handleSelect = (index: number) => {
+    setActivePilar(index);
+    setIsPaused(true);
+  };
 
   return (
-    <div className="feature-card isolated-card flex flex-col justify-between p-8 md:p-9 bg-warm-white border border-border-subtle rounded-[2rem] shadow-bento">
-      <div className="mb-6">
-        <h3 className="font-sans font-extrabold text-2xl mb-2 text-charcoal">
-          Los 4 Pilares
-        </h3>
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="feature-card isolated-card flex flex-col justify-between p-7 md:p-8 bg-warm-white border border-border-subtle rounded-[2rem] shadow-bento"
+    >
+      <div className="mb-5">
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <h3 className="font-sans font-extrabold text-2xl text-charcoal">
+            Los 4 Pilares
+          </h3>
+          <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-cream text-charcoal/60 font-bold">
+            4 ÁREAS CLAVE
+          </span>
+        </div>
         <p className="font-sans text-sm text-charcoal/70">
-          Haz clic en cada pilar para ver cómo transforma tu biología:
+          Selecciona un pilar para ver qué hace en tu cuerpo:
         </p>
       </div>
 
-      <div className="flex flex-col gap-2.5 my-auto">
+      {/* 4 Uniform-Height Little Cards (Zero Layout Shift) */}
+      <div className="flex flex-col gap-2 mb-4" role="tablist" aria-label="Los 4 Pilares">
         {PILARES.map((pilar, i) => {
           const isActive = activePilar === i;
           const IconComponent = pilar.icon;
           return (
             <button
-              key={pilar.title}
+              key={pilar.id}
               type="button"
-              onClick={() => setActivePilar(i)}
-              className={`w-full text-left rounded-2xl px-4 py-3.5 border transition-transform duration-300 flex flex-col gap-2 ${
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => handleSelect(i)}
+              className={`w-full text-left rounded-2xl px-4 py-3 border transition-colors duration-200 flex items-center justify-between gap-3 ${
                 isActive
-                  ? "bg-moss text-warm-white border-moss scale-[1.02] shadow-md"
-                  : "bg-white text-charcoal border-border-subtle/80 hover:border-charcoal/30"
+                  ? "bg-moss text-warm-white border-moss shadow-sm"
+                  : "bg-white text-charcoal border-border-subtle/80 hover:border-charcoal/40"
               }`}
             >
-              <div className="w-full flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span
-                    aria-hidden="true"
-                    className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                      isActive
-                        ? "bg-accent text-white"
-                        : "bg-cream text-charcoal/70"
-                    }`}
-                  >
-                    <IconComponent size={16} />
-                  </span>
-                  <div>
-                    <span
-                      className={`block font-mono text-[10px] font-bold tracking-wider ${
-                        isActive ? "text-warm-white/60" : "text-charcoal/50"
-                      }`}
-                    >
-                      PILAR 0{i + 1}
-                    </span>
-                    <span className="font-sans text-sm md:text-[15px] font-bold">
-                      {pilar.title}
-                    </span>
-                  </div>
-                </div>
+              <div className="flex items-center gap-3 min-w-0">
                 <span
                   aria-hidden="true"
-                  className={`w-2 h-2 rounded-full shrink-0 ${
-                    isActive ? "bg-accent" : "bg-border-subtle"
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                    isActive
+                      ? "bg-accent text-white"
+                      : "bg-cream text-charcoal/70"
                   }`}
-                />
+                >
+                  <IconComponent size={16} />
+                </span>
+                <div className="min-w-0">
+                  <span
+                    className={`block font-mono text-[10px] font-bold tracking-wider ${
+                      isActive ? "text-accent" : "text-charcoal/45"
+                    }`}
+                  >
+                    PILAR {pilar.id}
+                  </span>
+                  <span className="block font-sans text-sm font-bold truncate">
+                    {pilar.title}
+                  </span>
+                </div>
               </div>
-
-              {isActive && (
-                <p className="font-sans text-xs text-warm-white/80 pl-11 leading-relaxed">
-                  {pilar.benefit}
-                </p>
-              )}
+              <span
+                aria-hidden="true"
+                className={`w-2.5 h-2.5 rounded-full shrink-0 transition-colors ${
+                  isActive ? "bg-accent" : "bg-border-subtle"
+                }`}
+              />
             </button>
           );
         })}
+      </div>
+
+      {/* Dedicated Fixed-Height Inspector Box (Never shifts buttons above) */}
+      <div
+        role="tabpanel"
+        className="mt-auto rounded-2xl bg-white border border-border-subtle p-4 min-h-[138px] flex flex-col justify-between"
+      >
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-md">
+            PILAR {current.id} · {current.tag}
+          </span>
+        </div>
+        <p className="font-sans text-xs md:text-[13px] text-charcoal/85 leading-relaxed font-medium my-auto">
+          {current.benefit}
+        </p>
       </div>
     </div>
   );
@@ -200,141 +280,243 @@ function DiagnosticShuffler() {
 
 function TelemetryTypewriter() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % RESULTADOS.length);
-    }, 3400);
+    }, 4800);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
+
+  const current = RESULTADOS[activeIndex];
+
+  const handleSelect = (idx: number) => {
+    setActiveIndex(idx);
+    setIsPaused(true);
+  };
 
   return (
-    <div className="feature-card isolated-card flex flex-col justify-between p-8 md:p-9 bg-obsidian text-warm-white border border-white/10 rounded-[2rem] shadow-obsidian">
-      <div className="flex justify-between items-start gap-4 mb-6">
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="feature-card isolated-card flex flex-col justify-between p-7 md:p-8 bg-obsidian text-warm-white border border-white/10 rounded-[2rem] shadow-obsidian"
+    >
+      <div className="flex justify-between items-start gap-3 mb-5">
         <div>
-          <h3 className="font-sans font-extrabold text-2xl mb-2 text-warm-white">
+          <h3 className="font-sans font-extrabold text-2xl mb-1.5 text-warm-white">
             Evidencia comprobada
           </h3>
           <p className="font-sans text-sm text-warm-white/65">
-            Resultados reales logrados con el sistema, sin atajos.
+            Selecciona cada logro para ver cómo se consiguió:
           </p>
         </div>
-        <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/15 shrink-0">
+        <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full border border-white/15 shrink-0">
           <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="font-mono text-[11px] font-bold text-warm-white tracking-widest">
-            CASOS REALES
+          <span className="font-mono text-[10px] font-bold text-warm-white tracking-widest">
+            REAL
           </span>
         </div>
       </div>
 
-      {/* Clean metric rows */}
-      <div className="flex flex-col gap-2.5 my-auto">
+      {/* 5 Uniform-Height Interactive Achievement Buttons */}
+      <div className="flex flex-col gap-2 mb-4" role="tablist" aria-label="Evidencia comprobada">
         {RESULTADOS.map((item, idx) => {
           const isCurrent = idx === activeIndex;
           return (
-            <div
-              key={item}
-              onClick={() => setActiveIndex(idx)}
-              className={`cursor-pointer rounded-xl px-4 py-3.5 border transition-transform duration-300 flex items-center gap-3 ${
+            <button
+              key={item.title}
+              type="button"
+              role="tab"
+              aria-selected={isCurrent}
+              onClick={() => handleSelect(idx)}
+              className={`w-full text-left rounded-xl px-3.5 py-2.5 border transition-colors duration-200 flex items-center gap-3 ${
                 isCurrent
-                  ? "bg-white/[0.08] border-accent text-warm-white scale-[1.01]"
-                  : "bg-transparent border-white/[0.06] text-warm-white/50 hover:text-warm-white/80"
+                  ? "bg-white/[0.1] border-accent text-warm-white"
+                  : "bg-white/[0.02] border-white/[0.07] text-warm-white/55 hover:text-warm-white/85 hover:border-white/20"
               }`}
             >
               <span
                 aria-hidden="true"
-                className={`w-2 h-2 rounded-full shrink-0 ${
+                className={`w-2 h-2 rounded-full shrink-0 transition-colors ${
                   isCurrent ? "bg-accent" : "bg-white/20"
                 }`}
               />
-              <span className="font-mono text-xs md:text-[13px] font-semibold leading-snug">
-                {item}
+              <span className="font-mono text-xs font-semibold leading-snug">
+                {item.title}
               </span>
-            </div>
+            </button>
           );
         })}
+      </div>
+
+      {/* Dedicated Fixed-Height Case Explanation Box */}
+      <div
+        role="tabpanel"
+        className="mt-auto rounded-2xl bg-white/[0.05] border border-white/10 p-4 min-h-[138px] flex flex-col justify-between"
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles size={13} className="text-accent shrink-0" />
+          <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-accent">
+            {current.tag}
+          </span>
+        </div>
+        <p className="font-sans text-xs md:text-[13px] text-warm-white/85 leading-relaxed my-auto">
+          {current.detail}
+        </p>
       </div>
     </div>
   );
 }
 
 function ProtocolScheduler() {
-  const [selectedDays, setSelectedDays] = useState<number[]>([0, 1, 2, 4]);
+  const [selectedDays, setSelectedDays] = useState<number[]>([0, 1, 3, 4]);
   const [savedPulse, setSavedPulse] = useState(false);
 
   const toggleDay = (index: number) => {
-    setSelectedDays((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+    setSelectedDays((prev) => {
+      const next = prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index].sort((a, b) => a - b);
+      return next;
+    });
+    setSavedPulse(false);
   };
+
+  const count = selectedDays.length;
+  const selectedNames =
+    count > 0
+      ? selectedDays.map((i) => DIAS[i].full).join(", ")
+      : "Ningún día seleccionado";
+
+  const getPhaseRecommendation = (days: number) => {
+    if (days === 0) {
+      return {
+        badge: "SELECCIONA TUS DÍAS",
+        text: "Marca arriba los días que tienes disponibles para calcular tu estructura semanal ideal.",
+      };
+    }
+    if (days <= 2) {
+      return {
+        badge: "FASE ADAPTACIÓN · 1–2 DÍAS",
+        text: "Ideal si partes de cero o tienes poco tiempo: priorizamos movilidad articular, hidratación y nutrición.",
+      };
+    }
+    if (days <= 4) {
+      return {
+        badge: "PUNTO ÓPTIMO RECLUTA · 3–4 DÍAS",
+        text: "El equilibrio más efectivo para perder grasa, construir fuerza muscular y permitir descanso nervioso.",
+      };
+    }
+    return {
+      badge: "PROTOCOLO AVANZADO · 5+ DÍAS",
+      text: "Combinamos días de fuerza progresiva con sesiones de recuperación activa, costal búlgaro y movilidad.",
+    };
+  };
+
+  const phase = getPhaseRecommendation(count);
 
   const handleSave = () => {
     setSavedPulse(true);
-    setTimeout(() => setSavedPulse(false), 1200);
   };
 
+  const whatsappScheduleUrl = `https://wa.me/525545520392?text=${encodeURIComponent(
+    `Hola Delta, simulé mi semana en la web: puedo entrenar ${count} días por semana (${selectedNames}). ¿Qué programa me recomiendas?`
+  )}`;
+
   return (
-    <div className="feature-card isolated-card flex flex-col justify-between p-8 md:p-9 bg-warm-white border border-border-subtle rounded-[2rem] shadow-bento">
-      <div className="mb-6">
-        <h3 className="font-sans font-extrabold text-2xl mb-2 text-charcoal">
-          Constancia medida
-        </h3>
+    <div className="feature-card isolated-card flex flex-col justify-between p-7 md:p-8 bg-warm-white border border-border-subtle rounded-[2rem] shadow-bento">
+      <div className="mb-5">
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <h3 className="font-sans font-extrabold text-2xl text-charcoal">
+            Constancia medida
+          </h3>
+          <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-cream text-charcoal/60 font-bold">
+            SIMULADOR
+          </span>
+        </div>
         <p className="font-sans text-sm text-charcoal/70">
-          Adaptamos la frecuencia a tu agenda real para que nunca abandones a mitad del camino.
+          Elige qué días puedes entrenar y descubre cómo adaptamos tu plan:
         </p>
       </div>
 
-      <div className="bg-white border border-border-subtle rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-5 my-auto">
+      <div className="bg-white border border-border-subtle rounded-2xl p-5 shadow-sm flex flex-col gap-4 mb-4">
         {/* Weekly Adherence Meter (GPU scaleX transform) */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between font-mono text-[11px] font-bold text-charcoal/60">
-            <span>FRECUENCIA OBJETIVO</span>
-            <span className="text-accent">
-              {selectedDays.length} / 7 DÍAS ACTIVOS
-            </span>
+            <span>DISPONIBILIDAD SEMANAL</span>
+            <span className="text-accent">{count} / 7 DÍAS</span>
           </div>
           <div className="h-2 w-full bg-cream rounded-full overflow-hidden">
             <div
               className="h-full w-full bg-accent rounded-full origin-left transition-transform duration-300"
-              style={{ transform: `scaleX(${selectedDays.length / 7})` }}
+              style={{ transform: `scaleX(${count / 7})` }}
             />
           </div>
         </div>
 
         {/* Weekly Grid */}
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-1.5" role="group" aria-label="Días de la semana">
           {DIAS.map((d, i) => {
             const isSelected = selectedDays.includes(i);
             return (
               <button
-                key={i}
+                key={d.short}
                 type="button"
+                aria-pressed={isSelected}
+                aria-label={d.full}
                 onClick={() => toggleDay(i)}
-                className={`aspect-square flex flex-col items-center justify-center rounded-xl font-mono text-xs font-bold border transition-transform duration-200 ${
+                className={`aspect-square flex flex-col items-center justify-center rounded-xl font-mono text-xs font-bold border transition-colors duration-150 ${
                   isSelected
-                    ? "bg-accent border-accent text-white scale-[1.04]"
+                    ? "bg-accent border-accent text-white shadow-sm"
                     : "bg-warm-white border-border-subtle text-charcoal hover:border-charcoal/40"
                 }`}
               >
-                <span>{d}</span>
+                <span>{d.short}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Action Button */}
-        <button
-          type="button"
-          onClick={handleSave}
-          className={`w-full py-3.5 rounded-xl font-bold font-sans text-sm transition-colors duration-200 flex items-center justify-center gap-2 ${
-            savedPulse
-              ? "bg-accent text-white"
-              : "bg-moss text-warm-white hover:bg-charcoal"
-          }`}
-        >
-          {savedPulse && <Check aria-hidden="true" size={16} />}
-          <span>{savedPulse ? "¡Meta semanal registrada!" : "Simular mi semana"}</span>
-        </button>
+        {/* Action / WhatsApp Sync */}
+        {!savedPulse ? (
+          <button
+            type="button"
+            disabled={count === 0}
+            onClick={handleSave}
+            className="w-full py-3 rounded-xl font-bold font-sans text-xs sm:text-sm transition-colors duration-200 flex items-center justify-center gap-2 bg-moss text-warm-white hover:bg-charcoal disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <CalendarCheck aria-hidden="true" size={16} />
+            <span>Confirmar {count} días por semana</span>
+          </button>
+        ) : (
+          <a
+            href={whatsappScheduleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 rounded-xl font-bold font-sans text-xs sm:text-sm transition-colors duration-200 flex items-center justify-center gap-2 bg-accent text-white hover:bg-[#A94626]"
+          >
+            <Check aria-hidden="true" size={16} />
+            <span>Enviar mis {count} días a Delta en WhatsApp</span>
+            <ArrowUpRight aria-hidden="true" size={15} />
+          </a>
+        )}
+      </div>
+
+      {/* Dedicated Fixed-Height Dynamic Recommendation Box */}
+      <div className="mt-auto rounded-2xl bg-white border border-border-subtle p-4 min-h-[138px] flex flex-col justify-between">
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-md">
+            {phase.badge}
+          </span>
+        </div>
+        <p className="font-sans text-xs md:text-[13px] text-charcoal/85 leading-relaxed font-medium my-auto">
+          {phase.text}
+        </p>
+        <div className="font-mono text-[10px] text-charcoal/50 truncate mt-2 pt-2 border-t border-border-subtle/60">
+          Días: {selectedNames}
+        </div>
       </div>
     </div>
   );

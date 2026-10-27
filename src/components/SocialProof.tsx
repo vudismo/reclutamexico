@@ -32,17 +32,22 @@ export default function SocialProof() {
       });
     });
 
-    gsap.from(".proof-card", {
-      y: 36,
-      opacity: 0,
-      duration: 0.75,
-      stagger: 0.12,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".proof-grid",
-        start: "top 82%",
-      },
-    });
+    gsap.fromTo(
+      ".proof-card",
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power3.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: ".proof-grid",
+          start: "top 85%",
+        },
+      }
+    );
   }, { scope: sectionRef });
 
   const addToRefs = (el: HTMLSpanElement | null) => {
@@ -62,10 +67,10 @@ export default function SocialProof() {
         ref={statsRef}
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
       >
-        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento transition-transform duration-300 hover:-translate-y-1">
+        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento">
           <div className="font-drama text-7xl md:text-8xl text-accent mb-3 leading-none font-bold">
             -<span ref={addToRefs} data-target="105">
-              0
+              105
             </span>{" "}
             <span className="text-4xl md:text-5xl">kg</span>
           </div>
@@ -74,10 +79,10 @@ export default function SocialProof() {
           </div>
         </div>
 
-        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento transition-transform duration-300 hover:-translate-y-1">
+        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento">
           <div className="font-drama text-7xl md:text-8xl text-accent mb-3 leading-none font-bold">
             +<span ref={addToRefs} data-target="200">
-              0
+              200
             </span>
           </div>
           <div className="font-sans font-bold text-charcoal/80 uppercase tracking-wider text-xs">
@@ -85,10 +90,10 @@ export default function SocialProof() {
           </div>
         </div>
 
-        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento transition-transform duration-300 hover:-translate-y-1">
+        <div className="isolated-card bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 text-center shadow-bento">
           <div className="font-drama text-7xl md:text-8xl text-accent mb-3 leading-none font-bold">
             <span ref={addToRefs} data-target="4">
-              0
+              4
             </span>
           </div>
           <div className="font-sans font-bold text-charcoal/80 uppercase tracking-wider text-xs">
@@ -176,7 +181,7 @@ export default function SocialProof() {
 
       <div className="proof-grid flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-8 pb-8 snap-x snap-mandatory hide-scrollbars">
         {/* Testimonial 1 */}
-        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-colors duration-200">
           <div>
             <Quote className="text-accent/25 w-9 h-9 mb-5" />
             <p className="font-sans text-lg text-charcoal font-medium mb-8 leading-relaxed">
@@ -196,7 +201,7 @@ export default function SocialProof() {
         </div>
 
         {/* Testimonial 2 */}
-        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-colors duration-200">
           <div>
             <Quote className="text-accent/25 w-9 h-9 mb-5" />
             <p className="font-sans text-lg text-charcoal font-medium mb-8 leading-relaxed">
@@ -216,7 +221,7 @@ export default function SocialProof() {
         </div>
 
         {/* Testimonial 3 */}
-        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="proof-card isolated-card snap-center shrink-0 w-[85vw] md:w-auto bg-warm-white rounded-[2rem] p-8 md:p-9 border-l-4 border-accent shadow-bento border-t border-r border-b border-border-subtle flex flex-col justify-between transition-colors duration-200">
           <div>
             <Quote className="text-accent/25 w-9 h-9 mb-5" />
             <p className="font-sans text-lg text-charcoal font-medium mb-8 leading-relaxed">

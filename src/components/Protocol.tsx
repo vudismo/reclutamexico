@@ -9,17 +9,22 @@ export default function Protocol() {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from(".protocol-step-card", {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.14,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 78%",
-      },
-    });
+    gsap.fromTo(
+      ".protocol-step-card",
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.75,
+        stagger: 0.12,
+        ease: "power3.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      }
+    );
 
     // GPU-composited SVG emphasis animations triggered once on scroll
     gsap.fromTo(
@@ -92,7 +97,7 @@ export default function Protocol() {
         {/* 3-Step Bento Architecture */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-white/10 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-transform duration-300 hover:-translate-y-1">
+          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-white/10 hover:border-white/25 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-colors duration-200">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-sm text-accent font-bold tracking-widest px-3.5 py-1.5 rounded-xl bg-accent/10 border border-accent/25">
@@ -116,7 +121,7 @@ export default function Protocol() {
           </div>
 
           {/* Card 2 */}
-          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-white/10 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-transform duration-300 hover:-translate-y-1">
+          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-white/10 hover:border-white/25 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-colors duration-200">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-sm text-accent font-bold tracking-widest px-3.5 py-1.5 rounded-xl bg-accent/10 border border-accent/25">
@@ -140,7 +145,7 @@ export default function Protocol() {
           </div>
 
           {/* Card 3 */}
-          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-accent/35 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-transform duration-300 hover:-translate-y-1">
+          <div className="protocol-step-card isolated-card bg-[#141916] rounded-[2.25rem] border border-accent/35 hover:border-accent/60 p-8 md:p-10 flex flex-col justify-between shadow-obsidian transition-colors duration-200">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-sm text-accent font-bold tracking-widest px-3.5 py-1.5 rounded-xl bg-accent/10 border border-accent/25">

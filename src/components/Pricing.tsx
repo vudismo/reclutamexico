@@ -57,17 +57,22 @@ export default function Pricing() {
   const activeCostal = COSTALES[activeIndex >= 0 ? activeIndex : 1];
 
   useGSAP(() => {
-    gsap.from(".bento-tier", {
-      y: 36,
-      opacity: 0,
-      duration: 0.75,
-      stagger: 0.08,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 78%",
-      },
-    });
+    gsap.fromTo(
+      ".bento-tier",
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      }
+    );
   }, { scope: sectionRef });
 
   return (
@@ -92,7 +97,7 @@ export default function Pricing() {
       {/* Services Bento Grid */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 max-w-6xl mx-auto mb-28">
         {/* Tier 1 - Comunidad */}
-        <div className="bento-tier isolated-card md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="bento-tier isolated-card md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-colors duration-200">
           <div>
             <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-charcoal/55 bg-cream px-3 py-1 rounded-full font-bold mb-4">
               Paso inicial sin costo
@@ -130,7 +135,7 @@ export default function Pricing() {
         </div>
 
         {/* Tier 2 - Guías */}
-        <div className="bento-tier isolated-card md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="bento-tier isolated-card md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-colors duration-200">
           <div>
             <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-charcoal/55 bg-cream px-3 py-1 rounded-full font-bold mb-4">
               A tu propio ritmo
@@ -168,7 +173,7 @@ export default function Pricing() {
         </div>
 
         {/* Tier 3 - Programa Grupal (FEATURED CENTERPIECE) */}
-        <div className="bento-tier md:col-span-12 bg-moss-deep isolate-blend rounded-[2.5rem] p-8 sm:p-12 md:p-14 shadow-obsidian ring-2 ring-accent relative z-20 transition-transform duration-300 hover:-translate-y-1 my-2">
+        <div className="bento-tier md:col-span-12 bg-moss-deep isolate-blend rounded-[2.5rem] p-8 sm:p-12 md:p-14 shadow-obsidian ring-2 ring-accent relative z-20 transition-colors duration-200 my-2">
           <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden pointer-events-none">
             <Image
               src="/images/featured_tech_texture.png"
@@ -233,7 +238,7 @@ export default function Pricing() {
         </div>
 
         {/* Tier 4 - Presencial */}
-        <div className="bento-tier md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 relative mt-4 md:mt-0">
+        <div className="bento-tier md:col-span-6 bg-warm-white border border-border-subtle rounded-[2rem] p-8 md:p-10 shadow-bento flex flex-col justify-between transition-colors duration-200 relative mt-4 md:mt-0">
           <div className="absolute -top-3.5 left-8 bg-accent text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest py-1 px-4 rounded-full font-mono whitespace-nowrap z-20 shadow-sm">
             Cupo limitado · Lista de espera
           </div>
@@ -271,7 +276,7 @@ export default function Pricing() {
         </div>
 
         {/* Tier 5 - VIP Intensivo */}
-        <div className="bento-tier isolated-card md:col-span-6 bg-obsidian text-warm-white border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-obsidian flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div className="bento-tier isolated-card md:col-span-6 bg-obsidian text-warm-white border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-obsidian flex flex-col justify-between transition-colors duration-200">
           <div>
             <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-accent bg-accent/15 border border-accent/30 px-3 py-1 rounded-full font-bold mb-4">
               Acompañamiento 1:1 Total
@@ -337,14 +342,20 @@ export default function Pricing() {
 
             {/* Right side: Interactive Selector */}
             <div className="md:col-span-7 w-full flex flex-col items-center md:items-start">
-              {/* Weight Toggle Pills */}
-              <div className="flex flex-nowrap justify-start lg:justify-center gap-1.5 sm:gap-2 bg-off-white p-2 rounded-full mb-10 border border-border-subtle w-full sm:w-fit overflow-x-auto sm:overflow-visible scrollbar-hide mx-auto md:mx-0">
+              {/* Weight Toggle Pills (No overflow-x clipping so Top badge is always 100% visible) */}
+              <div
+                role="tablist"
+                aria-label="Seleccionar peso de Costal Búlgaro"
+                className="flex flex-wrap justify-center md:justify-start gap-2 bg-off-white p-2 rounded-3xl sm:rounded-full mb-10 border border-border-subtle w-full sm:w-fit mx-auto md:mx-0"
+              >
                 {COSTALES.map((item) => {
                   const isActive = selectedCostalId === item.id;
                   return (
                     <button
                       key={item.id}
                       type="button"
+                      role="tab"
+                      aria-selected={isActive}
                       onClick={() => setSelectedCostalId(item.id)}
                       className={`relative px-4 sm:px-6 py-2.5 rounded-full font-mono text-xs sm:text-sm transition-colors duration-200 whitespace-nowrap flex-shrink-0 ${
                         isActive
